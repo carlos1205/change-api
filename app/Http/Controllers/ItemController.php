@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class ItemController extends Controller
 {
         public function getAll(){
-            $items = Item::all();
+            $items = Item::with(['user', 'type'])->get();
             return response()->json($items, 200);
         }
 
@@ -19,7 +19,8 @@ class ItemController extends Controller
                 ], 404);
             }
 
-            $item = Item::find($id);
+            
+            $item = Item::with(['user', 'type'])->find($id);
             return response()->json($item, 200);
         }
 
@@ -51,7 +52,7 @@ class ItemController extends Controller
                 $item -> type_id =  (int) $request -> type_id;
                 $item -> save();
 
-                return response()->json($item, 201);
+                return response()->json($item, 200);
             }else{
                 return response()->json(["message"=>"Not found"], 404);
             }

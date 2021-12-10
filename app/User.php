@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Relation\HasMany;
 
 class User extends Authenticatable
 {
@@ -27,4 +28,8 @@ class User extends Authenticatable
         'pass', 'remember_token',
     ];
     public $timestamps = false;
+
+    public function item(){
+        return $this->hasMany(Item::class, 'user_id', 'id');
+    }
 }
