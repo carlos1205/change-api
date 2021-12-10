@@ -25,6 +25,14 @@ class ItemController extends Controller
         }
 
         public function create(Request $request){
+            $request -> validate([
+                'name' => 'required',
+                'description' => 'required',
+                'image' => 'required',
+                'user_id' => 'required',
+                'type_id' => 'required'
+            ]);
+
             $item = new Item;
             $item -> name = $request -> name;
             $item -> description = $request -> description;
@@ -41,6 +49,14 @@ class ItemController extends Controller
         }
 
         public function update(Request $request, $id){
+            $request -> validate([
+                'name' => 'required',
+                'description' => 'required',
+                'image' => 'required',
+                'user_id' => 'required',
+                'type_id' => 'required'
+            ]);
+
             if(Item::where('id', $id)->exists())
             {
                 $item = Item::find($id);

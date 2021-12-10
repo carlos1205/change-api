@@ -23,6 +23,10 @@ class TypeController extends Controller
     }
 
     public function create(Request $request){
+        $this -> validate($request, [
+            'name' => 'required'
+        ]);
+
         $type = new Type;
         $type -> name = $request -> name;
         $type -> save();
@@ -34,6 +38,10 @@ class TypeController extends Controller
     }
 
     public function update(Request $request, $id){
+        $request -> validate([
+            'name' => 'required'
+        ]);
+
         if(Type::where('id', $id)->exists())
         {
             $type = Type::find($id);

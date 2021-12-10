@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 */
 
 Route::post('/login', 'UserController@login');
-Route::post('/create', 'UserController@create');
+Route::post('/user/create', 'UserController@create');
 
 Route::middleware('auth:api')->prefix('user')->group(function () {
     Route::put('/update', 'UserController@update');
